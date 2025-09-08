@@ -9,7 +9,7 @@ public class UdpServerUI : MonoBehaviour
     [SerializeField] private UDPServer _server;
     [SerializeField] private TMP_InputField messageInput;
 
-    // >>> NUEVO: salida visual
+
     [SerializeField] private TMP_Text chatOutput;
     [SerializeField] private ScrollRect scroll;
 

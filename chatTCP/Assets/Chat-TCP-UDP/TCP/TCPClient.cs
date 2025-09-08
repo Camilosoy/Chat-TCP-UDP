@@ -20,8 +20,7 @@ public class TCPClient : MonoBehaviour
 
     private enum MsgType : byte { Text = 0, Image = 1 }
 
-    private const int MaxFrameSize = 32 * 1024 * 1024; // 32MB por seguridad
-
+    private const int MaxFrameSize = 32 * 1024 * 1024; 
     void Update()
     {
         while (mainThreadActions.TryDequeue(out var a))
@@ -54,7 +53,7 @@ public class TCPClient : MonoBehaviour
         while (readTotal < count)
         {
             int r = s.Read(buffer, offset + readTotal, count - readTotal);
-            if (r <= 0) return false; // desconectado
+            if (r <= 0) return false; 
             readTotal += r;
         }
         return true;
@@ -87,16 +86,16 @@ public class TCPClient : MonoBehaviour
                     string msg = Encoding.UTF8.GetString(payload);
                     mainThreadActions.Enqueue(() => OnTextReceived?.Invoke(msg));
                 }
-                else // Image
+                else 
                 {
-                    // ¡Nada de Unity en este hilo! Creamos la textura en el hilo principal.
+                    
                     byte[] img = payload;
                     mainThreadActions.Enqueue(() =>
                     {
                         try
                         {
                             var tex = new Texture2D(2, 2);
-                            tex.LoadImage(img);  // seguro en hilo principal
+                            tex.LoadImage(img);  
                             OnImageReceived?.Invoke(tex);
                         }
                         catch (Exception e) { Debug.LogWarning("[CLIENT] LoadImage error: " + e.Message); }
@@ -117,7 +116,7 @@ public class TCPClient : MonoBehaviour
         }
     }
 
-    // --- ENVIAR ---
+   
     public void SendText(string msg)
     {
         if (stream == null) return;
@@ -134,7 +133,7 @@ public class TCPClient : MonoBehaviour
         if (stream == null) return;
         try
         {
-            byte[] data = tex.EncodeToPNG(); // JPG si quieres menos tamaño
+            byte[] data = tex.EncodeToPNG(); 
             if (data.Length > MaxFrameSize)
             {
                 Debug.LogWarning($"[CLIENT] Image too large ({data.Length} bytes).");

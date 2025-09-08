@@ -60,8 +60,7 @@ public class TCPServer : MonoBehaviour
         {
             Debug.LogWarning("[SERVER] Accept error: " + e.Message);
         }
-        // Si quisieras aceptar más clientes simultáneamente, llama de nuevo:
-        // listener.BeginAcceptTcpClient(OnClientConnected, null);
+    
     }
 
     private static bool ReadExact(NetworkStream s, byte[] buffer, int offset, int count)
@@ -131,7 +130,7 @@ public class TCPServer : MonoBehaviour
         }
     }
 
-    // --- ENVIAR ---
+
     public void SendText(string msg)
     {
         if (stream == null) return;

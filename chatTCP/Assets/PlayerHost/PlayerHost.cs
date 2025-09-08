@@ -36,7 +36,7 @@ public class PlayerHost : MonoBehaviour
         multiplayerTransform = Instantiate(playerPrefab, spawnPosition).transform;
     }
 
-   void Update()
+void Update()
     {
         
         while (mainThreadActions.TryDequeue(out Action action))
@@ -58,7 +58,7 @@ public class PlayerHost : MonoBehaviour
             }
         }
         
-   }
+}
         
     
 

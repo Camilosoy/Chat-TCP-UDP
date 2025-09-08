@@ -10,7 +10,7 @@ public class UdpClientUI : MonoBehaviour
     [SerializeField] private UDPClient _client;
     [SerializeField] private TMP_InputField messageInput;
 
-    // >>> NUEVO: a dónde dibujar el chat (asigna en el Inspector)
+
     [SerializeField] private TMP_Text chatOutput;
     [SerializeField] private ScrollRect scroll;
 
@@ -30,7 +30,7 @@ public class UdpClientUI : MonoBehaviour
         if (scroll != null)
         {
             Canvas.ForceUpdateCanvases();
-            scroll.verticalNormalizedPosition = 0; // auto-scroll al final
+            scroll.verticalNormalizedPosition = 0; 
         }
     }
 
@@ -46,6 +46,6 @@ public class UdpClientUI : MonoBehaviour
     public void ConnectClient()
     {
         _client.StartUDPClient(serverAddress, serverPort);
-        Append($"Conectando a {serverAddress}:{serverPort} …");
+        Append($"Conectando a {serverAddress}:{serverPort} ï¿½");
     }
 }

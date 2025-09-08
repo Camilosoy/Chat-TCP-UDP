@@ -29,7 +29,7 @@ public class UDPServer : MonoBehaviour
         udpServer.BeginReceive(ReceiveData, null);
         isServerRunning = true;
 
-        // Mensaje informativo para la UI (opcional)
+    
         mainThread.Enqueue(() => OnMessageReceived?.Invoke("Servidor UDP listo en puerto " + port));
     }
 
@@ -39,7 +39,7 @@ public class UDPServer : MonoBehaviour
         string receivedMessage = Encoding.UTF8.GetString(receivedBytes);
         Debug.Log("Received from client: " + receivedMessage);
 
-        // >>> NUEVO: notificar a la UI
+    
         mainThread.Enqueue(() => OnMessageReceived?.Invoke("Cliente: " + receivedMessage));
 
         udpServer.BeginReceive(ReceiveData, null);
@@ -51,7 +51,7 @@ public class UDPServer : MonoBehaviour
         udpServer.Send(sendBytes, sendBytes.Length, remoteEndPoint);
         Debug.Log("Sent to client: " + message);
 
-        // >>> Mostrar inmediatamente mi envío en la UI
+    
         mainThread.Enqueue(() => OnMessageReceived?.Invoke("Yo: " + message));
     }
 }
